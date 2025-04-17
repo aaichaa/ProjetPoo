@@ -17,11 +17,11 @@ public class Bordure extends Salle {
     /**
      * Restitue l'aspect du bord du plateau. Par exemple, ██
      *
-     * @return
+     * @return X
      */
     @Override
     public String toString() {
-        return "XX";
+        return "X";
     }
 
     @Override

@@ -92,11 +92,12 @@ public class Plateau {
         int lig = s.getLig() + d.getdLig();
         int col = s.getCol() + d.getdCol();
 
-        if (lig >= 0 && lig < grille.length && col >= 0 && col < grille[0].length) {
+        // ✅ Empêche de sortir de la zone JOUABLE (évite les bordures)
+        if (lig >= 1 && lig <= nbLig && col >= 1 && col <= nbCol) {
             return grille[lig][col];
-        } else {
-            return null; // au cas où ça dépasse encore (sécurité)
         }
+
+        return null; // Si c’est une bordure, retourne null
     }
 
     /**

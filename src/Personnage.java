@@ -40,7 +40,7 @@ public abstract class Personnage {
 
     }
 
-    private void setEnergie(int energie) {
+    protected void setEnergie(int energie) {
         if (energie < 0) {
             System.out.println("L'énergie doit etre positive");
         } else {
@@ -123,8 +123,11 @@ public abstract class Personnage {
      * @param autre Le personnage à qui l'énergie est prise
      */
     public void prendEnergie(Personnage autre) {
-        /* Code à spécifier */
+        int aPrendre = Math.min(10 - this.getEnergie(), autre.getEnergie());
+        autre.setEnergie(autre.getEnergie() - aPrendre); // on vide l’autre
+        this.ajouteEnergie(aPrendre); // on remplit ce qu’on peut
     }
+
 
     public void ajouteEnergie(int qte) {
         this.energie = Math.min(this.energie + qte, 10); // ou une constante
@@ -168,9 +171,14 @@ public abstract class Personnage {
         if (p1.getForce() >= p2.getForce()) {
             p1.prendEnergie(p2);
             p2.perd();
+            System.out.println("Combat entre " + p1 + " (" + p1.getForce() + ") et " + p2 + " (" + p2.getForce() + ")");
+
         } else {
             p2.prendEnergie(p1);
             p1.perd();
+
+            System.out.println("Combat entre " + p1 + " (" + p1.getForce() + ") et " + p2 + " (" + p2.getForce() + ")");
+
         }
     }
 

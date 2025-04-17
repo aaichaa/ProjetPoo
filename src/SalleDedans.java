@@ -52,11 +52,17 @@ public class SalleDedans extends Salle {
         Personnage occupant = this.getPersonnage();
 
         if (occupant != null) {
-            p.rencontre(occupant); // le personnage essaie d'entrer → combat
+            p.rencontre(occupant); // déclenche le combat
+
+            // ✅ Si le combat libère la salle, migration du gagnant
+            if (this.getPersonnage() == null) {
+                p.migre(this);
+            }
         } else {
-            p.migre(this); // la salle est libre, migration
+            p.migre(this); // Salle vide
         }
     }
+
 
     /**
      * Si on affiche les symboles nous avons un gros décalage c'est lié aux tailles des symboles   
@@ -66,18 +72,10 @@ public class SalleDedans extends Salle {
      */
     @Override
     public String toString() {
-        String bidon = (getBidon() != null) ? "0" : ".";
-        String perso;
-
-        if (getPersonnage() instanceof Joueur) {
-            perso = "J";
-        } else if (getPersonnage() instanceof Adversaire) {
-            perso = "A";
-        } else {
-            perso = ".";
-        }
-
-        return bidon + perso; // 2 caractères ASCII uniquement, pas d’emoji
+        if (getPersonnage() instanceof Joueur) return "J";
+        if (getPersonnage() instanceof Adversaire) return "A";
+        if (getBidon() != null) return "0";
+        return "."; // vide
     }
 
 }

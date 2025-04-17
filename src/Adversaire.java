@@ -105,9 +105,9 @@ public class Adversaire extends Personnage {
      * joueur qu'il référencera et la salle initiale dans laquelle il est placé
      * (éventuellement)
      *
-     * @param leJoueur permet à chaque adversaire de référencer le joueur pour
-     * « savoir » où il est à chaque instant
-     * @param position salle initiale de l'adversaire
+     * @param inertie permet
+     * @param energie energie
+     * @param joueur le joueur
      */
     public Adversaire(int inertie, int energie, Joueur joueur) {
         super(inertie, energie);
@@ -123,7 +123,7 @@ public class Adversaire extends Personnage {
      */
     @Override
     public String toString() {
-        return "♟"; 
+        return "A";
     }
 
 }
