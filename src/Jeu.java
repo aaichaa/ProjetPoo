@@ -48,50 +48,6 @@ public class Jeu {
      * aléatoire des adversaires (hors centre et bidons) - Placement aléatoire
      * des bidons (hors centre)
      */
-    /*  public void initJeu() {
-        int ligCentre = plateau.getNbLig() / 2 + 1;
-        int colCentre = plateau.getNbCol() / 2 + 1;
-
-        // Création du joueur
-        joueur = new Joueur(plateau, ENERGIE_MAX, this);
-        SalleDedans salleCentre = (SalleDedans) plateau.getSalle(ligCentre, colCentre);
-        joueur.setPosition(salleCentre);
-        salleCentre.setPersonnage(joueur);
-
-        Random rand = new Random();
-
-        // Placement des bidons
-        int bidonsPlaces = 0;
-        while (bidonsPlaces < NB_BIDONS) {
-            int i = rand.nextInt(plateau.getNbLig()) + 1;
-            int j = rand.nextInt(plateau.getNbCol()) + 1;
-
-            Salle s = plateau.getSalle(i, j);
-            if (s instanceof SalleDedans && !(s instanceof SalleBidon) && s != salleCentre && s.getBidon() == null) {
-                plateau.setSalle(new SalleBidon(i, j, plateau), i, j);
-                bidonsPlaces++;
-            }
-        }
-
-        // Placement des adversaires
-        int advPlaces = 0;
-        while (advPlaces < NB_ADVERSAIRES) {
-            int i = rand.nextInt(plateau.getNbLig()) + 1;
-            int j = rand.nextInt(plateau.getNbCol()) + 1;
-
-            Salle s = plateau.getSalle(i, j);
-            if (s instanceof SalleDedans && s.getPersonnage() == null && s != salleCentre) {
-                int inertie = rand.nextInt(8) + 2; // inertie entre 2 et 9
-                Adversaire a = new Adversaire(inertie, ENERGIE_MAX, joueur);
-                SalleDedans sd = (SalleDedans) s;
-                a.setPosition(sd);
-                sd.setPersonnage(a);
-                adversaires.add(a);
-                advPlaces++;
-            }
-        }
-    }
-     */
     public void initJeu() {
         int ligCentre = plateau.getNbLig() / 2 + 1;
         int colCentre = plateau.getNbCol() / 2 + 1;
@@ -134,8 +90,8 @@ public class Jeu {
         while (advPlaces < NB_ADVERSAIRES && index < sallesDispo.size()) {
             Salle s = plateau.getSalle(sallesDispo.get(index).getLig(), sallesDispo.get(index).getCol());
             if (s instanceof SalleDedans sd && !(s instanceof SalleBidon)) {
-                int inertie = new Random().nextInt(8) + 2; // 2 à 9
-                Adversaire a = new Adversaire(inertie, ENERGIE_MAX, joueur);
+//                int inertie = new Random().nextInt(8) + 2; // 2 à 9
+                Adversaire a = new Adversaire(4, 3 /*ENERGIE_MAX*/, joueur);
                 a.setPosition(sd);
                 sd.setPersonnage(a);
                 adversaires.add(a);
@@ -155,6 +111,7 @@ public class Jeu {
     public void joue() {
         while (!fini && !joueur.estNeutralise()) {
             System.out.println(plateau);
+            System.out.println("Énergie du joueur : " + joueur.getEnergie() );
             System.out.println("Collecteur : " + collecteur.getContenu());
             System.out.println("Adversaires restants : " + adversaires.size());
             System.out.println();
@@ -171,7 +128,9 @@ public class Jeu {
                 if (!a.estNeutralise()) {
                     a.avance();
                 } else {
-                    a.getPosition().setPersonnage(null);
+                    if (a.getPosition() != null) {
+                        a.getPosition().setPersonnage(null);
+                    }
                     aSupprimer.add(a);
                 }
             }

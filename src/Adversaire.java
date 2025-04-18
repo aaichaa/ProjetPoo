@@ -38,24 +38,68 @@ public class Adversaire extends Personnage {
      * direction donnée, avec la possibilité d'interagir avec le contenu de la
      * salle.
      */
+//    @Override
+//    public void avance() {
+//        if (this.estNeutralise()) {
+//            return;
+//        }
+//
+//        Direction d;
+//        if (this.getForce() >= joueur.getForce()) {
+//            d = getDirectionVersJoueur(); // poursuit
+//        } else {
+//            d = getDirectionVersJoueur().getInverse(); // fuit
+//        }
+//
+//        Salle destination = this.getPosition().getVoisine(d);
+//        if (destination != null) {
+//            destination.entre(this); // interaction + migration si libre
+//        }
+//    }
+
     @Override
     public void avance() {
+        // Si l’adversaire est neutralisé, il ne bouge pas
         if (this.estNeutralise()) {
+            System.out.println(this + " est neutralisé. Il ne bouge pas.");
             return;
         }
 
-        Direction d;
-        if (this.getForce() >= joueur.getForce()) {
-            d = getDirectionVersJoueur(); // poursuit
-        } else {
-            d = getDirectionVersJoueur().getInverse(); // fuit
+        // Direction vers le joueur
+        Direction d = getDirectionVersJoueur();
+
+        //  Déjà sur la même case que le joueur
+        if (d.getdLig() == 0 && d.getdCol() == 0) {
+            System.out.println(this + " est déjà sur la même case que le joueur.");
+            return;
         }
 
+        //  4. Si plus faible, fuit
+        if (this.getForce() < joueur.getForce()) {
+            System.out.println(this + " est plus faible que le joueur (" + this.getForce() + " < " + joueur.getForce() + "), il fuit.");
+            Direction dInverse = d.getInverse();
+
+            if (dInverse.getdLig() == 0 && dInverse.getdCol() == 0) {
+                System.out.println("Direction inverse invalide. Il ne bouge pas.");
+                return;
+            }
+
+            d = dInverse;
+        } else {
+            System.out.println(this + " est plus fort ou égal au joueur (" + this.getForce() + " >= " + joueur.getForce() + "), il poursuit.");
+        }
+
+        // Déplacement dans la direction choisie
         Salle destination = this.getPosition().getVoisine(d);
+
         if (destination != null) {
-            destination.entre(this); // interaction + migration si libre
+            System.out.println(this + " tente de se déplacer vers la direction (" + d.getdLig() + "," + d.getdCol() + ").");
+            destination.entre(this);
+        } else {
+            System.out.println(this + " ne peut pas se déplacer dans la direction (" + d.getdLig() + "," + d.getdCol() + "). Il passe son tour.");
         }
     }
+
 
     /**
      * Action spécifique à un adversaire pour prendre de l'énergie dans une
@@ -96,9 +140,13 @@ public class Adversaire extends Personnage {
     @Override
     public void perd() {
         if (this.estNeutralise()) {
-            this.getPosition().setPersonnage(null);
+            if (this.getPosition() != null) {
+                this.getPosition().setPersonnage(null);
+                this.setPosition(null); // 🧹 Nettoyage complet
+            }
         }
     }
+
 
     /**
      * Initialise un Adversaire avec une inertie aléatoire entre 2 et 9, le
