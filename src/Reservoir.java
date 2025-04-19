@@ -93,7 +93,7 @@ public abstract class Reservoir {
     }
 
     /**
-     * Transfert d'un montant positif d'énergie d'un réservoir externe au
+     * Transfert d'un montant positig d'énergie d'un réservoir externe au
      * réservoir courant
      *
      * @param montant souhaité

@@ -25,7 +25,7 @@ public class Joueur extends Personnage {
      */
     @Override
     public void rencontre(Personnage p) {
-      Personnage.combat(this, p);
+        Personnage.combat(this, p);
 
     }
 
@@ -37,15 +37,9 @@ public class Joueur extends Personnage {
     public void perd() {
         if (this.estNeutralise()) {
             System.out.println("Le joueur a été neutralisé. Fin du jeu !");
-            if (this.getPosition() != null) {
-                this.getPosition().setPersonnage(null); // libère la salle
-                this.setPosition(null);                 // sécurité anti-bug
-            }
-            jeu.setFini(true);
+            jeu.setFini(true); // ou une autre façon d'arrêter le jeu
         }
     }
-
-
 
     /**
      * Avancée du joueur dans une direction demandée à l'utilisateur humain.
@@ -88,12 +82,12 @@ public class Joueur extends Personnage {
         // Retirer l'énergie du bidon ou adversaire
         r.modifEnergie(-demande);
 
-        int choix = Lire.i("1 - Recharger ma propre énergie\n2 - Stocker dans le collecteur\n Veuillez choisir");
+        int choix = Lire.i("1 - Recharger ma propre énergie\n2 - Stocker dans le collecteur");
         if (choix == 1) {
             this.ajouteEnergie(demande); // méthode à ajouter dans Personnage
         } else {
-            int accepte = jeu.getCollecteur().ajustementAjout(demande);
-            jeu.getCollecteur().modifEnergie(accepte);
+            int accepté = jeu.getCollecteur().ajustementAjout(demande);
+            jeu.getCollecteur().modifEnergie(accepté);
         }
     }
 
