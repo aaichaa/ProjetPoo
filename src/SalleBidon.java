@@ -37,20 +37,8 @@ public class SalleBidon extends SalleDedans {
     /**
      * Si le personnage p est entré, il peut prendre de l'énergie dans le bidon
      *
-     * @param p
+     * @param p personnage
      */
-//    @Override
-//    public void entre(Personnage p) {
-//        if (this.getPersonnage() != null) {
-//            p.rencontre(this.getPersonnage());
-//        } else {
-//            p.migre(this);
-//            if (this.getBidon() != null) {
-//                p.prendEnergie(this.getBidon());
-//            }
-//        }
-//    }
-
     @Override
     public void entre(Personnage p) {
         Personnage occupant = this.getPersonnage();

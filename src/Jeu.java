@@ -14,6 +14,7 @@ public class Jeu {
      */
     private Plateau plateau;
     private Joueur joueur;
+    private int typeAdversaireChoisi;
     private ArrayList<Adversaire> adversaires;
     private Collecteur collecteur;
     private boolean fini = false;
@@ -90,8 +91,18 @@ public class Jeu {
         while (advPlaces < NB_ADVERSAIRES && index < sallesDispo.size()) {
             Salle s = plateau.getSalle(sallesDispo.get(index).getLig(), sallesDispo.get(index).getCol());
             if (s instanceof SalleDedans sd && !(s instanceof SalleBidon)) {
-//                int inertie = new Random().nextInt(8) + 2; // 2 à 9
-                Adversaire a = new Adversaire(4, 3 /*ENERGIE_MAX*/, joueur);
+
+                Adversaire a;
+                switch (typeAdversaireChoisi) {
+                    case 1 -> a = new AdversairesDetermines(4, 3, joueur);         // Déterminés
+                    case 2 -> a = new AdversaireVelleitaires(4, 3, joueur);        // Velléitaires
+                    case 3 -> a = new AdversairesIntelligents(4, 3, joueur);       // Intelligents
+                    default -> {
+                        System.out.println("Type inconnu, on choisit des Déterminés par défaut.");
+                        a = new AdversairesDetermines(4, 3, joueur);
+                    }
+                }
+
                 a.setPosition(sd);
                 sd.setPersonnage(a);
                 adversaires.add(a);
@@ -156,14 +167,29 @@ public class Jeu {
      * Crée une instance de jeu. Cela crée un joueur, un plateau rempli de
      * bidons et d'adversaires, et lance le jeu (méthode joue())
      *
-     * @param nbLig
-     * @param nbCol
+     * @param nbLig ligne
+     * @param nbCol colonnes
      */
     public Jeu(int nbLig, int nbCol) {
         this.plateau = new Plateau(nbLig, nbCol, this);
         this.adversaires = new ArrayList<>();
         this.collecteur = new Collecteur();
         this.fini = false;
+
+        String nomJoueur = Lire.S("Entrez votre nom");
+
+        // Choix du type d'adversaire
+        System.out.println("Choisissez le type d’adversaires à affronter");
+        System.out.println("1 - Adversaires Déterminés (ils vous poursuivent/fuient sans réfléchir)");
+        System.out.println("2 - Adversaires Velléitaires (se déplacent avec un peu de hasard)");
+        System.out.println("3 - Adversaires Intelligents (analysent les alentours)");
+
+        int choixType = Lire.i("Votre choix : ");
+        while (choixType < 1 || choixType > 3) {
+            choixType = Lire.i("Veuillez entrer 1, 2 ou 3");
+        }
+
+        this.typeAdversaireChoisi = choixType;
 
         initJeu();
         joue();
