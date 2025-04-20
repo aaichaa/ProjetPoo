@@ -251,6 +251,11 @@ public class Direction
         return Direction.getDirection(this.getRang()+4);
     }
 
+    public static Direction[] getAllDirections() {
+        return DIRECTIONS;
+    }
+
+
     /**
      * Restitue une désignation textuelle de la direction courante
      * @return une chaîne de caractères

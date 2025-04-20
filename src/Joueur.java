@@ -88,7 +88,7 @@ public class Joueur extends Personnage {
         // Retirer l'énergie du bidon ou adversaire
         r.modifEnergie(-demande);
 
-        int choix = Lire.i("1 - Recharger ma propre énergie\n2 - Stocker dans le collecteur\n Veuillez choisir");
+        int choix = Lire.i("1 - Recharger ma propre énergie\n2 - Stocker dans le collecteur\n Veuillez choisir 1 ou 2");
         if (choix == 1) {
             this.ajouteEnergie(demande); // méthode à ajouter dans Personnage
         } else {

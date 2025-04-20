@@ -75,7 +75,7 @@ public class SalleDedans extends Salle {
         if (getPersonnage() instanceof Joueur) return "J";
         if (getPersonnage() instanceof Adversaire) return "A";
         if (getBidon() != null) return "0";
-        return "."; // vide
+        return ".";
     }
 
 }

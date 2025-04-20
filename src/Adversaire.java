@@ -12,12 +12,22 @@ public class Adversaire extends Personnage {
      */
     private Joueur joueur;
 
+    public Joueur getJoueur() {
+        return joueur;
+    }
+
+
     /**
      * Restitue la direction que l'on doit prendre pour aller vers le joueur
      *
-     * @return
+     * @return new Direction
      */
     public Direction getDirectionVersJoueur() {
+
+        if (joueur == null || joueur.estNeutralise() || joueur.getPosition() == null) {
+            return new Direction(0, 0); // Pas de déplacement
+        }
+
         int ligJ = joueur.getPosition().getLig();
         int colJ = joueur.getPosition().getCol();
 
@@ -38,25 +48,6 @@ public class Adversaire extends Personnage {
      * direction donnée, avec la possibilité d'interagir avec le contenu de la
      * salle.
      */
-//    @Override
-//    public void avance() {
-//        if (this.estNeutralise()) {
-//            return;
-//        }
-//
-//        Direction d;
-//        if (this.getForce() >= joueur.getForce()) {
-//            d = getDirectionVersJoueur(); // poursuit
-//        } else {
-//            d = getDirectionVersJoueur().getInverse(); // fuit
-//        }
-//
-//        Salle destination = this.getPosition().getVoisine(d);
-//        if (destination != null) {
-//            destination.entre(this); // interaction + migration si libre
-//        }
-//    }
-
     @Override
     public void avance() {
         // Si l’adversaire est neutralisé, il ne bouge pas

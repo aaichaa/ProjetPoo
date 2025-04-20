@@ -167,24 +167,20 @@ public abstract class Personnage {
      * @param p2 un autre Personnage
      */
     public static void combat(Personnage p1, Personnage p2) {
+        // à retirer cet affichage
+        System.out.println("Énergie Avant combat — " + p1 + " : " + p1.getEnergie() + " / " + p2 + " : " + p2.getEnergie());
+
         if (p1.getForce() >= p2.getForce()) {
-            System.out.println("Énergie Avant combat — " + p1 + " : " + p1.getEnergie() + " / " + p2 + " : " + p2.getEnergie());
             p1.prendEnergie(p2);
-
-            // 💡 Libère la position de p2 dans TOUS les cas, gagnant ou non
-            p2.getPosition().setPersonnage(null);
             p2.perd();
-
         } else {
-            System.out.println("Énergie Avant combat — " + p1 + " : " + p1.getEnergie() + " / " + p2 + " : " + p2.getEnergie());
             p2.prendEnergie(p1);
-            p1.getPosition().setPersonnage(null);
             p1.perd();
         }
 
+        // à retirer cet affichage
         System.out.println("Combat entre " + p1 + " (" + p1.getForce() + ") et " + p2 + " (" + p2.getForce() + ")");
         System.out.println("Énergie après combat — " + p1 + " : " + p1.getEnergie() + " / " + p2 + " : " + p2.getEnergie());
     }
-
 
 }

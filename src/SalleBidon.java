@@ -39,12 +39,37 @@ public class SalleBidon extends SalleDedans {
      *
      * @param p
      */
+//    @Override
+//    public void entre(Personnage p) {
+//        if (this.getPersonnage() != null) {
+//            p.rencontre(this.getPersonnage());
+//        } else {
+//            p.migre(this);
+//            if (this.getBidon() != null) {
+//                p.prendEnergie(this.getBidon());
+//            }
+//        }
+//    }
+
     @Override
     public void entre(Personnage p) {
-        if (this.getPersonnage() != null) {
-            p.rencontre(this.getPersonnage());
+        Personnage occupant = this.getPersonnage();
+
+        if (occupant != null) {
+            p.rencontre(occupant);
+
+            // ✅ Si le combat libère la salle, migration du gagnant
+            if (this.getPersonnage() == null) {
+                p.migre(this);
+
+                if (this.getBidon() != null) {
+                    p.prendEnergie(this.getBidon());
+                }
+            }
         } else {
+            // Salle vide → migration directe
             p.migre(this);
+
             if (this.getBidon() != null) {
                 p.prendEnergie(this.getBidon());
             }
