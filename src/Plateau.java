@@ -119,8 +119,6 @@ public class Plateau {
                 }
             }
         }
-
-        // Tu pourras plus tard ajouter SalleBidon, adversaires, joueur...
     }
 
     /**
