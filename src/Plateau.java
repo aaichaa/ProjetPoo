@@ -2,7 +2,7 @@
 /**
  * Représente le plateau du jeu défini par un tableau de salles.
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public class Plateau {
 

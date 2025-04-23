@@ -4,7 +4,7 @@
  * Toutes les salles ont une position lig-col et appartiennent à un plateau donné.
  * Elles ont toutes une méthode entre(Personnage p) qui est exécutée quand un personnage se présente à l'entrée de la salle (il avance vers la salle)
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public abstract class Salle {
 
