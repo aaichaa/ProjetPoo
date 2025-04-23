@@ -3,7 +3,7 @@
  * Représente les adversaires de l'énoncé, qui doivent courser/fuir le joueur suivant leur force.
  * Cette classe peut avoir des classes dérivées correspondant à des types d'adversaires distincts.
  *
- * @author jo
+ * @author BOBO
  */
 public abstract class Adversaire extends Personnage {
 

@@ -3,7 +3,7 @@
  * Salle interne au plateau qui contient un bidon.
  * En plus de ce que font les autres instances de SalleDedans, elles doivent gérer l'interaction entre le personnage entrant et le bidon qu'elles contiennent — pour y prendre de l'énergie
  *
- * @author jo
+ * @author BOBO
  */
 public class SalleBidon extends SalleDedans {
 

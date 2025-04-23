@@ -2,7 +2,7 @@
 /**
  * Représente une salle interne au plateau, qui contient potentiellement un personnage
  *
- * @author jo
+ * @author Bobo
  */
 public class SalleDedans extends Salle {
 
@@ -63,18 +63,24 @@ public class SalleDedans extends Salle {
         }
     }
 
-
     /**
-     * Si on affiche les symboles nous avons un gros décalage c'est lié aux tailles des symboles   
-     *  .A -> adversaire, .J -> Joueur, .. -> Case vide, XX -> Bordures, .0 c'est le bidon
+     * Si on affiche les symboles nous avons un gros décalage c'est lié aux
+     * tailles des symboles .A -> adversaire, .J -> Joueur, .. -> Case vide, XX
+     * -> Bordures, .0 c'est le bidon
      *
      * @return String
      */
     @Override
     public String toString() {
-        if (getPersonnage() instanceof Joueur) return "J";
-        if (getPersonnage() instanceof Adversaire) return "A";
-        if (getBidon() != null) return "0";
+        if (getPersonnage() instanceof Joueur) {
+            return "J";
+        }
+        if (getPersonnage() instanceof Adversaire) {
+            return "A";
+        }
+        if (getBidon() != null) {
+            return "0";
+        }
         return ".";
     }
 
