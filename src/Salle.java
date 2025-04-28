@@ -21,7 +21,7 @@ public abstract class Salle {
         this.setLig(lig);
         this.setCol(col);
     }
-
+    //Constructeur
     public Salle(int lig, int col, Plateau plateau, Bidon bidon, Personnage personnage) {
         this.setLig(lig);
         this.setCol(col);
@@ -74,11 +74,11 @@ public abstract class Salle {
             this.bidon = bidon;
         }
     }
-
+    //verification si ya un bidon
     public boolean hasBidon() {
         return this.bidon != null;
     }
-
+    //verification si ya un personnage
     public boolean hasPersonnage() {
         return this.personnage != null;
     }

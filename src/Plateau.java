@@ -89,10 +89,12 @@ public class Plateau {
      * @return Une salle quelconque, y compris une salle de type Bordure
      */
     public Salle getVoisine(SalleDedans s, Direction d) {
+        //Calcule la nouvelle position
+        //Ajoute le déplacement demandé (Direction) aux coordonnées actuelles
         int lig = s.getLig() + d.getdLig();
         int col = s.getCol() + d.getdCol();
 
-        // ✅ Empêche de sortir de la zone JOUABLE (évite les bordures)
+        //  Empêche de sortir de la zone JOUABLE (évite les bordures)
         if (lig >= 1 && lig <= nbLig && col >= 1 && col <= nbCol) {
             return grille[lig][col];
         }
@@ -129,12 +131,23 @@ public class Plateau {
      *
      * @return La chaîne de caractères qui représente le plateau
      */
-    @Override
+    /*  @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Salle[] ligne : grille) {
             for (Salle s : ligne) {
                 sb.append(s.toString());
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }*/
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(); //pour utiliser la meme chaine de caractere pour tout le texte
+        for (int i = 0; i < grille.length; i++) {
+            for (int j = 0; j < grille[0].length; j++) {
+                sb.append(grille[i][j].toString());
             }
             sb.append("\n");
         }

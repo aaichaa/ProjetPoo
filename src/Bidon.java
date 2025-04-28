@@ -4,7 +4,7 @@
  * Ce sont des réserves limitées d'énergie (avec un maximum d'énergie) auxquelles on ne peut pas ajouter d'énergie ; peut seulement en prendre.
  * Une instance de bidon est destinée à être référencée par une « SalleBidon ».
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public class Bidon extends ReserveLimitee {
 

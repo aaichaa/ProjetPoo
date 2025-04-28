@@ -6,7 +6,7 @@
 
 /**
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public class Direction
 {

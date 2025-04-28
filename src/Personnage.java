@@ -3,7 +3,7 @@
  * Représente les personnages du jeu qui, dans cette version, peuvent être un Joueur ou un Adversaire.
  * Les personnages ont tous une inertie, une réserve d'énergie initialisée à 10 et ont une position qui est une salle interne au plateau (SalleDedans)
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public abstract class Personnage {
 

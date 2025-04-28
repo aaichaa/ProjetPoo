@@ -1,7 +1,7 @@
 
 /**
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public class Main {
 

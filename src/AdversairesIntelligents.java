@@ -1,6 +1,14 @@
 import java.util.ArrayList;
 
+
+/* les adversaires intelligents tentent d’avancer le plus efficacement 
+*  possible en direction de (respectivement dans la direction inverse du) joueur,
+*  en tenant compte des zones de blocages
+*/
+
+
     public class AdversairesIntelligents extends Adversaire {
+        
 
         public AdversairesIntelligents(int inertie, int energie, Joueur joueur) {
             super(inertie, energie, joueur);

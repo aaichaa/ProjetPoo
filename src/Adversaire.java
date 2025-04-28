@@ -1,16 +1,16 @@
 
 /**
  * Représente les adversaires de l'énoncé, qui doivent courser/fuir le joueur suivant leur force.
- * Cette classe peut avoir des classes dérivées correspondant à des types d'adversaires distincts.
+ * Cette classe a des classes dérivées correspondant à des types d'adversaires distincts.
  *
- * @author BOBO
+ * @author Aissatou Bobo
  */
 public abstract class Adversaire extends Personnage {
 
     /*
     * Déclaration des attributs spécifiques à Adversaire (Ceux qui ne sont pas déjà déclarés dans Personnage)
      */
-    private Joueur joueur;
+    private Joueur joueur; //necessaire pour suivre ou fuir le joueur
 
     public Joueur getJoueur() {
         return joueur;
@@ -27,15 +27,22 @@ public abstract class Adversaire extends Personnage {
         if (joueur == null || joueur.estNeutralise() || joueur.getPosition() == null) {
             return new Direction(0, 0);
         }
-
+        //recuperation de la position du joueur
         int ligJ = joueur.getPosition().getLig();
         int colJ = joueur.getPosition().getCol();
-
+        
+        //recuperation de la position de l'adversaire lui meme
         int ligThis = this.getPosition().getLig();
         int colThis = this.getPosition().getCol();
-
+        
+        //on compare les differences de position entre le joueur et l'adversaire
+        
+        // calcule de la direction verticale à prendre
         int dLig = Integer.compare(ligJ - ligThis, 0);
+
+        // calcule de la direction horizontale à prendre
         int dCol = Integer.compare(colJ - colThis, 0);
+
 
         return new Direction(dLig, dCol);
     }

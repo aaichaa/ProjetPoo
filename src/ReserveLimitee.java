@@ -1,7 +1,7 @@
 /**
  * Réserve d'énergie bornée positivement (Il y a un maximum à ne pas dépasser)
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public class ReserveLimitee extends Reservoir {
 
@@ -43,7 +43,7 @@ public class ReserveLimitee extends Reservoir {
             return 0;
         }
 
-        int manque = max - getContenu();
+        int manque = max - getContenu(); //ce qui manque avant d'atteindre la limite de la reserve
         return Math.min(montant, manque);
     }
 

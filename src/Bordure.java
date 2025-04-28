@@ -3,9 +3,10 @@
  * Salles qui matérialisent le bord du plateau, auxquelles les personnages ne peuvent pas accéder.
  * Elle peuvent servir à gérer simplement les sorties de plateau — plutôt que de faire des tests systématiques.
  * Une tentative d'accès à ces salles est ignorée et peut éventuellement induire l'affichage d'un message d'erreur.
- * Si le plateau a nbCol colonnes et nbLig lignes effectives, numérotées de 1 à nbCol/nbLig, ces salles sont situées aux lignes/colonnes d'indice 0 et nbLig+1/nbCol+1
+ * Si le plateau a nbCol colonnes et nbLig lignes effectives, numérotées de 1 à nbCol/nbLig, ces salles sont situées 
+ * aux lignes/colonnes d'indice 0 et nbLig+1/nbCol+1
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public class Bordure extends Salle {
 

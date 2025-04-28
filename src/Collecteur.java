@@ -3,7 +3,7 @@
  * Il n'y a qu'un seul collecteur, qui doit être accessible uniquement du joueur.
  * L'instance de la classe Joueur peut le référencer.
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public class Collecteur extends Reservoir {
 

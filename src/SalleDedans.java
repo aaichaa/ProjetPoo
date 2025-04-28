@@ -2,13 +2,11 @@
 /**
  * Représente une salle interne au plateau, qui contient potentiellement un personnage
  *
- * @author Bobo
+ * @author Aissatou Bobo
  */
 public class SalleDedans extends Salle {
 
-    /*
-    * Déclaration des attributs d'une salle et accesseurs.
-     */
+  
     /**
      * Crée une salle interne au plateau initialement sans occupant ni bidon
      *
@@ -29,11 +27,11 @@ public class SalleDedans extends Salle {
     public Salle getVoisine(Direction d) {
         return this.getPlateau().getVoisine(this, d);
     }
-
+    //Retourne la salle voisine par un indice donné
     public Salle getVoisine(int i) {
         return getVoisine(new Direction(i));
     }
-
+    //Retourne la salle voisine par un text donné
     public Salle getVoisine(String directionTexte) {
         return getVoisine(new Direction(directionTexte));
     }
@@ -54,7 +52,7 @@ public class SalleDedans extends Salle {
         if (occupant != null) {
             p.rencontre(occupant); // déclenche le combat
 
-            // ✅ Si le combat libère la salle, migration du gagnant
+            // Si le combat libère la salle, migration du gagnant
             if (this.getPersonnage() == null) {
                 p.migre(this);
             }

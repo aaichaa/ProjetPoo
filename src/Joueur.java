@@ -4,14 +4,14 @@
  * Dans cette version du jeu, cette classe a une seule instance, dont la position doit être connue de ses adversaires.
  * Il doit pouvoir accéder au collecteur
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public class Joueur extends Personnage {
 
     /*
     * Déclaration des attributs spécifiques à Joueur et accesseurs (Ceux qui ne sont pas déjà déclarés dans Personnage)
      */
-    private Jeu jeu;
+    private Jeu jeu; //pour contôler la fin du jeu et acceder au collecteur
 
     /**
      * Action à effectuer quand un joueur (le joueur) rencontre un autre
@@ -41,7 +41,7 @@ public class Joueur extends Personnage {
                 this.getPosition().setPersonnage(null); // libère la salle
                 this.setPosition(null);                 // sécurité anti-bug
             }
-            jeu.setFini(true);
+            jeu.setFini(true); //on termine la partie
         }
     }
 
@@ -55,7 +55,7 @@ public class Joueur extends Personnage {
     @Override
     public void avance() {
         Direction d = Direction.getDirectionQuelconque(); // demande à l'utilisateur
-        Salle destination = this.getPosition().getVoisine(d); // on suppose que getPosition() est défini
+        Salle destination = this.getPosition().getVoisine(d); // on suppose que getPosition() est défini dans jeu
         if (destination != null) {
             destination.entre(this);
         } else {
@@ -92,10 +92,12 @@ public class Joueur extends Personnage {
         if (choix == 1) {
             this.ajouteEnergie(demande); // méthode à ajouter dans Personnage
         } else {
-            int accepte = jeu.getCollecteur().ajustementAjout(demande);
-            jeu.getCollecteur().modifEnergie(accepte);
+            int accepte = jeu.getCollecteur().ajustementAjout(demande);//demande au collecteur si on peut ajouter demande
+            jeu.getCollecteur().modifEnergie(accepte);//et on ajoute cette energie (demande) au collecteur
         }
     }
+    
+    //Constructeur
 
     public Joueur(Plateau plateau, int energieMax, Jeu jeu) {
         super(5, energieMax);

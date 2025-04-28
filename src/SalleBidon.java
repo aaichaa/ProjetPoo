@@ -3,13 +3,11 @@
  * Salle interne au plateau qui contient un bidon.
  * En plus de ce que font les autres instances de SalleDedans, elles doivent gérer l'interaction entre le personnage entrant et le bidon qu'elles contiennent — pour y prendre de l'énergie
  *
- * @author BOBO
+ * @author Aissatou Bobo
  */
 public class SalleBidon extends SalleDedans {
 
-    /*
-    * Déclaration des attributs d'une salle et accesseurs.
-     */
+  
     /**
      * Création d'une salle qui contient un bidon. Elle doit s'affecter un
      * nouveau bidon plein.
@@ -20,7 +18,7 @@ public class SalleBidon extends SalleDedans {
      */
     public SalleBidon(int lig, int col, Plateau p) {
         super(lig, col, p);
-        this.setBidon(new Bidon());
+        this.setBidon(new Bidon()); //crée un bidon avec 10 unités d'énergie et l'assigne a la salle
     }
 
     /**
@@ -46,7 +44,7 @@ public class SalleBidon extends SalleDedans {
         if (occupant != null) {
             p.rencontre(occupant);
 
-            // ✅ Si le combat libère la salle, migration du gagnant
+            // Si le combat libère la salle, migration du gagnant
             if (this.getPersonnage() == null) {
                 p.migre(this);
 
@@ -55,7 +53,7 @@ public class SalleBidon extends SalleDedans {
                 }
             }
         } else {
-            // Salle vide → migration directe
+            // Salle vide -> migration directe
             p.migre(this);
 
             if (this.getBidon() != null) {

@@ -1,4 +1,15 @@
+
+
+/* les adversaires déterminés avancent systématiquement dans la direction du joueur ou dans la
+* direction inverse, sauf s’ils sont bloqués par des accumulations d’autres personnages
+*
+*/
+
+
+
 public class AdversairesDetermines extends Adversaire{
+    
+    
     public AdversairesDetermines(int inertie, int energie, Joueur joueur) {
         super(inertie, energie, joueur);
     }

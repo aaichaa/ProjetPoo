@@ -2,7 +2,7 @@
  * Réserve d'énergie qui peut être vide.
  * Elle est représentée par une quantité d'énergie entière positive ou nulle.
  *
- * @author jo
+ * @author Aissatou Bobo
  */
 public abstract class Reservoir {
 
