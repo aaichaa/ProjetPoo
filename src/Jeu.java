@@ -73,7 +73,7 @@ public class Jeu {
         System.out.println("2 - Adversaires Velléitaires (se déplacent avec un peu de hasard)");
         System.out.println("3 - Adversaires Intelligents (analysent les alentours)");
 
-        int choixType = Lire.i("Votre choix : ");
+        int choixType = Lire.i("Votre choix");
         while (choixType < 1 || choixType > 3) {
             choixType = Lire.i("Veuillez entrer 1, 2 ou 3");
         }
