@@ -18,30 +18,30 @@ import java.util.ArrayList;
         public void avance() {
             if (this.estNeutralise()) return;
 
-            // On calcule la direction vers le joueur
+            // On recupere la direction vers le joueur
             Direction versJoueur = this.getDirectionVersJoueur();
             Direction directionCible;
 
             // On décide : fuir ou poursuivre
             if (this.getForce() >= getJoueur().getForce()) {
-                System.out.println("AI (intelligent) poursuit le joueur.");
+                System.out.println("L'adversaire intelligent poursuit le joueur.");
                 directionCible = versJoueur;
             } else {
-                System.out.println("AI (intelligent) fuit le joueur.");
+                System.out.println("L'adversaire intelligent fuit le joueur.");
                 directionCible = versJoueur.getInverse();
             }
 
             // On cherche toutes les directions dans l’ordre de proximité
             ArrayList<Direction> directions = getDirectionsParProximite(directionCible);
-
-            for (Direction d : directions) {
-                Salle destination = this.getPosition().getVoisine(d);
-                if (destination instanceof SalleDedans sd && sd.getPersonnage() == null) {
-                    System.out.println("AI avance vers : " + d);
-                    destination.entre(this);
-                    return;
-                }
+            for (int i = 0; i < directions.size(); i++) {
+            Direction d = directions.get(i);
+            Salle destination = this.getPosition().getVoisine(d);
+            if (destination instanceof SalleDedans sd && sd.getPersonnage() == null) {
+                System.out.println("AI avance vers : " + d);
+                destination.entre(this);
+                return;
             }
+        }
 
             System.out.println("AI ne peut pas bouger (toutes les directions sont bloquées). Il passe son tour.");
         }
@@ -63,17 +63,20 @@ import java.util.ArrayList;
             if (gauche != null) directions.add(gauche);
             if (droite != null) directions.add(droite);
 
-            // Les autres directions aléatoirement (pour variété)
-            for (Direction d : new Direction[] {
-                    Direction.HAUT, Direction.BAS, Direction.GAUCHE,
-                    Direction.DROITE, Direction.HAUT_DROITE,
-                    Direction.HAUT_GAUCHE, Direction.BAS_DROITE, Direction.BAS_GAUCHE
-            }) {
-                if (!directions.contains(d)) {
-                    directions.add(d);
-                }
-            }
+            // Les autres directions aléatoirement (pour variété) si elles ne sont pas déjà présentes
+            Direction[] toutes = {
+            Direction.HAUT, Direction.BAS, Direction.GAUCHE,
+            Direction.DROITE, Direction.HAUT_DROITE,
+            Direction.HAUT_GAUCHE, Direction.BAS_DROITE, Direction.BAS_GAUCHE
+        };
 
+        for (int i = 0; i < toutes.length; i++) {
+            Direction d = toutes[i];
+            if (!directions.contains(d)) {
+                directions.add(d);
+            }
+        }
+          
             return directions;
         }
         }

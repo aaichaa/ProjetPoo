@@ -96,7 +96,7 @@ public abstract class Salle {
 
     @Override
     public String toString() {
-        return "S"; // comme une salle vide
+        return "."; // comme une salle vide
     }
 
 }

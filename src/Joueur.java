@@ -76,7 +76,7 @@ public class Joueur extends Personnage {
     @Override
     public void prendEnergie(ReserveLimitee r) {
         System.out.println("Énergie disponible : " + r.getContenu());
-
+        if(!r.estVide()){
         int demande = Lire.i("Combien d'énergie voulez-vous prendre ?");
         if (demande < 0) {
             demande = 0;
@@ -84,16 +84,20 @@ public class Joueur extends Personnage {
         if (demande > r.getContenu()) {
             demande = r.getContenu();
         }
-
+        
         // Retirer l'énergie du bidon ou adversaire
         r.modifEnergie(-demande);
-
-        int choix = Lire.i("1 - Recharger ma propre énergie\n2 - Stocker dans le collecteur\n Veuillez choisir 1 ou 2");
+        
+        int choix;
+        do{
+         choix = Lire.i("1 - Recharger ma propre énergie\n2 - Stocker dans le collecteur\n Veuillez choisir 1 ou 2");
+        }while(choix>2 || choix <1);
         if (choix == 1) {
             this.ajouteEnergie(demande); // méthode à ajouter dans Personnage
-        } else {
+        } else if(choix == 2) {
             int accepte = jeu.getCollecteur().ajustementAjout(demande);//demande au collecteur si on peut ajouter demande
             jeu.getCollecteur().modifEnergie(accepte);//et on ajoute cette energie (demande) au collecteur
+        }
         }
     }
     

@@ -12,7 +12,7 @@ public class Plateau {
     private int nbLig;
     private int nbCol;
     private Salle[][] grille;
-    private Jeu jeu; // si tu veux relier au contexte global du jeu
+    private Jeu jeu; // pour relier au contexte global du jeu
 
     /**
      * Restitue le nombre effectif de lignes occupables (sans compter les

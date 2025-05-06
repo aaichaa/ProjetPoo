@@ -63,8 +63,8 @@ public class SalleDedans extends Salle {
 
     /**
      * Si on affiche les symboles nous avons un gros décalage c'est lié aux
-     * tailles des symboles .A -> adversaire, .J -> Joueur, .. -> Case vide, XX
-     * -> Bordures, .0 c'est le bidon
+     * tailles des symboles A -> adversaire, J -> Joueur, . -> Case vide, XX
+     * -> Bordures, 0 c'est le bidon
      *
      * @return String
      */

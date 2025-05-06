@@ -24,6 +24,7 @@ public class Jeu {
     private static final int ENERGIE_MAX = 10;
     private static final int NB_ADVERSAIRES = 5; // on peut rendre ça paramétrable
     private static final int NB_BIDONS = 5;
+     private String nomJoueur ;
 
     // Accesseurs utiles
     public Plateau getPlateau() {
@@ -32,6 +33,10 @@ public class Jeu {
 
     public Joueur getJoueur() {
         return joueur;
+    }
+    
+    public String getNomJoueur(){
+        return this.nomJoueur;
     }
 
     public Collecteur getCollecteur() {
@@ -53,13 +58,14 @@ public class Jeu {
      * @param nbLig ligne
      * @param nbCol colonnes
      */
+  
     public Jeu(int nbLig, int nbCol) {
         this.plateau = new Plateau(nbLig, nbCol, this);
         this.adversaires = new ArrayList<>();
         this.collecteur = new Collecteur();
         this.fini = false;
 
-        String nomJoueur = Lire.S("Entrez votre nom");
+         nomJoueur = Lire.S("Entrez votre nom");
 
         // Choix du type d'adversaire
         System.out.println("Choisissez le type d’adversaires à affronter");
@@ -84,6 +90,8 @@ public class Jeu {
      * des bidons (hors centre)
      */
     public void initJeu() {
+        // Affichage du plateau à l'initialisation
+        System.out.println("Affichage initial du plateau :");
         int ligCentre = plateau.getNbLig() / 2 + 1;
         int colCentre = plateau.getNbCol() / 2 + 1;
         SalleDedans salleCentre = (SalleDedans) plateau.getSalle(ligCentre, colCentre);
@@ -127,19 +135,19 @@ public class Jeu {
             if (s instanceof SalleDedans sd && !(s instanceof SalleBidon)) {
 
                 Adversaire a;
-                int inertie = 2 + rand.nextInt(8); // aléatoire entre 2 et 9
-                int energie = 10;                  // énergie fixée à 10
+                //int inertie = 2 + rand.nextInt(8); // aléatoire entre 2 et 9
+                //int energie = 10;                  // énergie fixée à 10
               
                 switch (typeAdversaireChoisi) {
                     case 1 ->
-                        a = new AdversairesDetermines(inertie, energie, joueur);         // Déterminés
+                        a = new AdversairesDetermines(4, 3, joueur);         // Déterminés
                     case 2 ->
-                        a = new AdversaireVelleitaires(inertie, energie, joueur);        // Velléitaires
+                        a = new AdversaireVelleitaires(4, 3, joueur);        // Velléitaires
                     case 3 ->
-                        a = new AdversairesIntelligents(inertie, energie, joueur);       // Intelligents
+                        a = new AdversairesIntelligents(4, 3, joueur);       // Intelligents
                     default -> {
                         System.out.println("Type inconnu, on choisit des Déterminés par défaut.");
-                        a = new AdversairesDetermines(inertie, energie, joueur);
+                        a = new AdversairesDetermines(4, 3, joueur);
                     }
                 }
 
@@ -162,20 +170,23 @@ public class Jeu {
     public void joue() {
         while (!fini && !joueur.estNeutralise()) {
             System.out.println(plateau);
-            System.out.println("Énergie du joueur : " + joueur.getEnergie());
+            System.out.println("Énergie de "+ this.nomJoueur+": " + joueur.getEnergie());
             System.out.println("Collecteur : " + collecteur.getContenu());
             System.out.println("Adversaires restants : " + adversaires.size());
             System.out.println();
 
             // Le joueur joue 2 fois
             joueur.avance();
-            if (!joueur.estNeutralise()) {
-                joueur.avance();
-            }
+            if(joueur.estNeutralise()) break;
+             joueur.avance();
+            if (joueur.estNeutralise()) break;
+               
+            
+            
 
             // Les adversaires jouent
             ArrayList<Adversaire> aSupprimer = new ArrayList<>();
-            // for (Adversaire a : adversaires) {
+          
             for (int i = 0; i < adversaires.size(); i++) {
                 Adversaire a = adversaires.get(i);
                 if (!a.estNeutralise()) {
@@ -195,13 +206,14 @@ public class Jeu {
                 int choix = Lire.i("Voulez-vous terminer la partie ? (1=oui, 0=non) ");
                 if (choix == 1) {
                     fini = true;
-                    System.out.println("Score final (énergie dans collecteur) : " + collecteur.getContenu());
+                    System.out.println("Jeu terminé : Score final (énergie dans collecteur) = " + collecteur.getContenu());
+                   
                 }
             }
         }
 
-        if (joueur.estNeutralise()) {
-            System.out.println("Le joueur a été neutralisé. GAME OVER.");
+        if (!fini && joueur.estNeutralise()) {
+            System.out.println(this.getNomJoueur()+" a été neutralisé. GAME OVER.");
         }
     }
 

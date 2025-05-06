@@ -112,7 +112,7 @@ public abstract class Personnage {
             System.out.println("Migration échouée : salle occupée.");
         }
     }
-
+    //Methode pour le deplacement d'un personnage 
     public void avance() {
     }
 
@@ -169,6 +169,7 @@ public abstract class Personnage {
     public static void combat(Personnage p1, Personnage p2) {
         // à retirer cet affichage
         System.out.println("Énergie Avant combat — " + p1 + " : " + p1.getEnergie() + " / " + p2 + " : " + p2.getEnergie());
+        System.out.println("Combat entre " + p1 + " (" + p1.getForce() + ") et " + p2 + " (" + p2.getForce() + ")");
 
         if (p1.getForce() >= p2.getForce()) {
             p1.prendEnergie(p2);
@@ -178,8 +179,8 @@ public abstract class Personnage {
             p1.perd();
         }
 
-        // à retirer cet affichage
-        System.out.println("Combat entre " + p1 + " (" + p1.getForce() + ") et " + p2 + " (" + p2.getForce() + ")");
+        // à retirer cet affichage si je veux, c'est juste pour voir comment se deroule le code 
+        
         System.out.println("Énergie après combat — " + p1 + " : " + p1.getEnergie() + " / " + p2 + " : " + p2.getEnergie());
     }
 
